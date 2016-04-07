@@ -16,21 +16,13 @@ names(mydata) <- tolower(names(mydata))
 mydata$company <- tolower(mydata$company)
 
 # Fix misspellings for "philips"
-mydata$company[which(mydata$company == "phillips" | 
-                     mydata$company == "phllips"  |   
-                     mydata$company == "phillps"  | 
-                     mydata$company == "fillips"  | 
-                     mydata$company == "phlips" 
-             )] <- "philips"
+mydata$company <- gsub("^[pf](.*)", "philips", mydata$company)
 
 # Fix misspellings for "akzo"
-mydata$company[which(mydata$company == "akzo" | 
-                     mydata$company == "akz0" |
-                     mydata$company == "ak zo"  
-            )] <- "akzo"
+mydata$company <- gsub("^ak(.*)", "akzo", mydata$company)
 
 # Fix misspellings for "unilever"
-mydata$company[which(mydata$company == "unilver")] <- "unilever"
+mydata$company <- gsub("^unil(.*)", "unilever", mydata$company)
 
 # 3: Add product categories
 mydata <- mydata %>% 
